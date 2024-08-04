@@ -1,6 +1,8 @@
 package Scenario
 
 import (
+	"Taxonim/Core/Injection"
+	"Taxonim/Core/Requester"
 	"context"
 	"net/http"
 	"net/http/cookiejar"
@@ -16,7 +18,7 @@ type ScenarioService struct {
 	ClientMutex sync.Mutex
 	Debug       bool
 	EngineMode  string
-	Ei          *injection.EnvironmentInjector
+	Ei          *Injection.EnvironmentInjector
 	IterIndex   int64
 }
 
