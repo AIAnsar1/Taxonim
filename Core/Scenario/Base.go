@@ -30,7 +30,7 @@ type ScenarioOpts struct {
 	InitialCookies         []*http.Cookie
 }
 
-type scenarioItemRequester struct {
+type ScenarioItemRequester struct {
 	scenarioItemID uint16
 	sleeper        Sleeper
 	requester      Requester.Requester

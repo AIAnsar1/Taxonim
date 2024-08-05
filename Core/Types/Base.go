@@ -1,6 +1,7 @@
 package Types
 
 import (
+	"Taxonim/Core/Proxy"
 	"crypto/tls"
 	"crypto/x509"
 	"github.com/google/uuid"
@@ -215,6 +216,13 @@ type Auth struct {
 	Type     string
 	Username string
 	Password string
+}
+
+type Scenario struct {
+	Steps   []ScenarioStep
+	Envs    map[string]interface{}
+	CsvVars []string
+	Data    map[string]CsvData
 }
 
 var LoadTypes = [...]string{LoadTypeLinear, LoadTypeIncremental, LoadTypeWaved}
