@@ -10,7 +10,7 @@ func (this AssertionError) Rule() string {
 
 }
 
-func (this AssertionError) Received() map[string]interface{} {
+func (this AssertionError) WReceived() map[string]interface{} {
 
 }
 
