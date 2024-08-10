@@ -1,0 +1,3 @@
+CREATE DATABASE backend;
+CREATE DATABASE marzybackend;
+CREATE DATABASE taxocli;

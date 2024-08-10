@@ -5,14 +5,14 @@ import "net/http"
 type AssertEnv struct {
 	StatusCode    int64
 	ResponseSize  int64
-	ResponseTime  int64 // in ms
+	ResponseTime  int64
 	Body          string
 	Headers       http.Header
 	Variables     map[string]interface{}
-	Cookies       map[string]*http.Cookie // cookies sent by the server, name -> cookie
-	TotalTime     []int64                 // in ms
+	Cookies       map[string]*http.Cookie
+	TotalTime     []int64
 	FailCount     int
-	FailCountPerc float64 // should be in range [0,1]
+	FailCountPerc float64
 }
 
 type NotFoundError struct {
