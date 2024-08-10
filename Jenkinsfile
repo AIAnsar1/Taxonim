@@ -32,7 +32,7 @@ if [ "${t%.*}" -lt 80 ]; then
 fi'''
       }
     }
-
+    
     stage('Main Race Condition') {
       steps {
         lock('multi_branch_server') {

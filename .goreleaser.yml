@@ -1,0 +1,131 @@
+project_name: Taxonim
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+    goarm:
+      - 6
+    ldflags:
+      - -s -w -X main.GitVersion={{ .Tag }} -X main.GitCommit={{ .ShortCommit }}  -X main.BuildDate={{ .CommitDate }}
+    ignore:
+      - goos: darwin
+        goarch: 386
+      - goos: darwin
+        goarch: arm
+        goarm: 7
+      - goos: darwin
+        goarch: arm
+        goarm: 6
+      - goos: darwin
+        goarch: arm
+        goarm: 5
+archives:
+  - format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE*
+
+universal_binaries:
+- replace: true
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Tag }}-next"
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - Merge pull request
+      - Merge branch
+      - go mod tidy
+
+brews:
+  - tap:
+      owner: Taxonim
+      name: homebrew-tap
+    folder: Formula
+    homepage:  https://ddosify.com
+    description: High-performance load testing tool, written in Golang.
+    license: AGPL-3.0-only
+    skip_upload: false
+    test: |
+      system "#{bin}/Taxonim --help"
+    dependencies:
+    - name: go
+      type: optional
+    install: |-
+      bin.install "Taxonim"
+    commit_author:
+      name: TaxonimAdmin
+      email: admin@Taxonim.com
+
+dockers:
+- image_templates:
+  - 'Taxonim/Taxonim:{{ .Tag }}-amd64'
+  dockerfile: Dockerfile.release
+  use: buildx
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Tag}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/amd64"
+  extra_files:
+  - assets/Taxonim.profile
+- image_templates:
+  - 'Taxonim/Taxonim:{{ .Tag }}-arm64'
+  dockerfile: Dockerfile.release
+  use: buildx
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Tag}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/arm64"
+  extra_files:
+  - assets/Taxonim.profile
+  goarch: arm64
+
+docker_manifests:
+- name_template: 'Taxonim/Taxonim:{{ .Tag }}'
+  image_templates:
+  - 'Taxonim/Taxonim:{{ .Tag }}-amd64'
+  - 'Taxonim/Taxonim:{{ .Tag }}-arm64'
+- name_template: 'Taxonim/Taxonim:latest'
+  image_templates:
+  - 'Taxonim/Taxonim:{{ .Tag }}-amd64'
+  - 'Taxonim/Taxonim:{{ .Tag }}-arm64'
+
+nfpms:
+  - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    id: packages
+    homepage:  https://Taxonim.com
+    description: High-performance load testing tool, written in Golang.
+    maintainer: Taxonim <admin@Taxonim.com>
+    license: AGPL-3.0-only
+    vendor: Taxonim
+    formats:
+    - apk
+    - deb
+    - rpm

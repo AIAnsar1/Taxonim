@@ -1,0 +1,13 @@
+linters:
+  enable:
+    - lll
+    - golint
+    - misspell
+linters-settings:
+  lll:
+    line-length: 120
+    tab-width: 1
+  golint:
+    min-confidence: 0.85
+  misspell:
+    locale: US
