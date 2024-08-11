@@ -41,7 +41,7 @@
 	},
 	"postCreateCommand": "mkdir -p ~/.ssh && cp -r ~/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",
 	"mounts": [
-		// "source=${env:HOME}/.zsh_history,target=/root/.zsh_history,type=bind,consistency=cached"
-		// "source=${env:HOME}/.bash_history,target=/root/.zsh_history,type=bind,consistency=cached"
+		"source=${env:HOME}/.zsh_history,target=/root/.zsh_history,type=bind,consistency=cached", // coment last
+		"source=${env:HOME}/.bash_history,target=/root/.zsh_history,type=bind,consistency=cached" // coment last
 	]
 }

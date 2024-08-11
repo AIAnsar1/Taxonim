@@ -1,6 +1,7 @@
 package Requester
 
 import (
+	"Taxonim/Core/Injection"
 	"Taxonim/Core/Types"
 	"context"
 	"net/http"

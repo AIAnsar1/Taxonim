@@ -2,6 +2,7 @@ package Assertion
 
 import (
 	"Taxonim/Core/Types"
+	"Taxonim/Evaluator"
 	"sync"
 )
 

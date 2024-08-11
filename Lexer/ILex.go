@@ -13,4 +13,5 @@ type ILexer interface {
 	ReadRawString() string
 	ReadNumber() string
     IsChAllowedInIdent(Ch byte) bool
+
 }

@@ -225,10 +225,12 @@ type Scenario struct {
 	Data    map[string]CsvData
 }
 
-var LoadTypes = [...]string{LoadTypeLinear, LoadTypeIncremental, LoadTypeWaved}
-var EngineModes = [...]string{EngineModeTaxonim, EngineModeDistinctUser, EngineModeRepeatedUser}
-var SupportedProtocols = [...]string{ProtocolHTTP, ProtocolHTTPS}
-var supportedProtocolMethods = []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodPatch, http.MethodHead, http.MethodOptions}
-var supportedAuthentications = []string{AuthHttpBasic}
-var envVarRegexp *regexp.Regexp
-var envVarNameRegexp *regexp.Regexp
+var (
+	LoadTypes                = [...]string{LoadTypeLinear, LoadTypeIncremental, LoadTypeWaved}
+	EngineModes              = [...]string{EngineModeTaxonim, EngineModeDistinctUser, EngineModeRepeatedUser}
+	SupportedProtocols       = [...]string{ProtocolHTTP, ProtocolHTTPS}
+	SupportedProtocolMethods = []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodPatch, http.MethodHead, http.MethodOptions}
+	SupportedAuthentications = []string{AuthHttpBasic}
+	EnvVarRegexp             *regexp.Regexp
+	EnvVarNameRegexp         *regexp.Regexp
+)

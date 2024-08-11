@@ -8,6 +8,12 @@ import (
 	"time"
 )
 
+type ReportService interface {
+	DoneChan() <-chan bool
+	Init(debug bool, samplingRate int) error
+	Start(input chan *Types.ScenarioResult, assertionResultChan <-chan Assertion.TestAssertionResult)
+}
+
 type Result struct {
 	TestStatus           string                                `json:"test_status"`
 	TestFailedAssertions []Assertion.FailedRule                `json:"failed_criterias"`
@@ -46,12 +52,6 @@ type AssertInfo struct {
 	Count    int
 	Received map[string][]interface{}
 	Reason   string
-}
-
-type ReportService interface {
-	DoneChan() <-chan bool
-	Init(debug bool, samplingRate int) error
-	Start(input chan *Types.ScenarioResult, assertionResultChan <-chan Assertion.TestAssertionResult)
 }
 
 type verboseRequest struct {
